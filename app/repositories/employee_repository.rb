@@ -9,12 +9,6 @@ class EmployeeRepository
     load_csv if File.exist?(csv_path)
   end
 
-  def add(new_employee)
-    new_employee.id = next_id
-    @employees << new_employee
-    update_csv
-  end
-
   def all
     @employees
   end

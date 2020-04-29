@@ -12,7 +12,7 @@ class MealsController
     # Ask for the name
     meal_name = @view.ask_for("name")
     # Ask for the price
-    meal_price = @view.ask_for("price")
+    meal_price = @view.ask_for("price").to_i
     # Initializing the meal with the params
     new_meal = Meal.new(name: meal_name, price: meal_price)
     # Ask repo to hold the meal

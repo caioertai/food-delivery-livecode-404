@@ -1,5 +1,5 @@
 require_relative "support/csv_helper"
-require 'pry-byebug'
+
 begin
   require_relative "../app/controllers/meals_controller"
   require_relative "../app/repositories/meal_repository"
@@ -53,7 +53,6 @@ describe "MealsController", :meal do
 
   describe "#list" do
     it "should grab meals from the repo and display them" do
-      # binding.pry
       controller = MealsController.new(repository)
       meals.drop(1).each do |meal_array|
         expect(STDOUT).to receive(:puts).with(/#{meal_array[1]}/)
