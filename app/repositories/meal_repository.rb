@@ -1,5 +1,7 @@
 require "csv"
 
+require_relative "../models/meal"
+
 class MealRepository
   def initialize(csv_path)
     @csv_path = csv_path

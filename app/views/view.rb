@@ -1,20 +1,16 @@
 class View
-  def ask_for_name
-    puts "What's the name?"
+  def ask_for(thing)
+    puts "What's the #{thing}?"
     print "> "
     gets.chomp
   end
 
-  def ask_for_address
-    puts "What's the address?"
-    print "> "
-    gets.chomp
+  def login_error
+    puts "Sorry, wrong credentials. Try again."
   end
 
-  def ask_for_price
-    puts "What's the price?"
-    print "> "
-    gets.chomp.to_i
+  def login_success(employee)
+    puts "Welcome, #{employee.username}."
   end
 
   def display_meals(meals)

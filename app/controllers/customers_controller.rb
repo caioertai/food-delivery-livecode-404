@@ -1,17 +1,17 @@
 require_relative "../models/customer"
-require_relative "../views/view"
+require_relative "../views/customers_view"
 
 class CustomersController
   def initialize(customer_repository)
     @customer_repository = customer_repository
-    @view = View.new
+    @view = CustomersView.new
   end
 
   def add
     # Ask VIEW to ask user for a name
-    customer_name = @view.ask_for_name
+    customer_name = @view.ask_for("name")
     # Ask VIEW to ask user for a address
-    customer_address = @view.ask_for_address
+    customer_address = @view.ask_for("address")
     # Ask MODEL to instantiate
     new_customer = Customer.new(name: customer_name, address: customer_address)
     # Ask REPO to save

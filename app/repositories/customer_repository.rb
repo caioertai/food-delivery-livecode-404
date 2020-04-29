@@ -1,5 +1,7 @@
 require "csv"
 
+require_relative "../models/customer"
+
 class CustomerRepository
   def initialize(csv_path)
     @csv_path = csv_path

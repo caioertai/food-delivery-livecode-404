@@ -1,4 +1,10 @@
-- [x] As a user, I can add a new meal
-- [x] As a user, I can list all the meals
-- [x] As a user, I can add a new customer
-- [x] As a user, I can list all the customers
+- [x] As an employee (manager/delivery guy), I can log in
+- [x] As a manager, I can add a new meal
+- [x] As a manager, I can list all the meals
+- [x] As a manager, I can add a new customer
+- [x] As a manager, I can list all the customers
+---
+- [ ] As a manager, I can add a new order
+- [ ] As a manager, I can list all undelivered orders
+- [ ] As a delivery guy, I can mark my orders as delivered
+- [ ] As a delivery guy, I can list all my undelivered orders
