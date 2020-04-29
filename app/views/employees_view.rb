@@ -6,8 +6,8 @@ class EmployeesView
   end
 
   def display_employees(employees)
-    employees.each do |employee|
-      puts "#{employee.id}. #{employee.username}"
+    employees.each_with_index do |employee, index|
+      puts "#{index + 1}. #{employee.username}"
     end
   end
 end

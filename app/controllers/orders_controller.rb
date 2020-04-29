@@ -6,7 +6,7 @@ require_relative "../views/employees_view"
 require_relative "../views/orders_view"
 
 class OrdersController
-  def initialize(order_repository, meal_repository, employee_repository, customer_repository)
+  def initialize(meal_repository, customer_repository, employee_repository, order_repository)
     @meal_repository = meal_repository
     @employee_repository = employee_repository
     @customer_repository = customer_repository
@@ -18,7 +18,7 @@ class OrdersController
     @orders_view = OrdersView.new
   end
 
-  def undelivered_orders_for(current_user)
+  def list_my_orders(current_user)
     orders = current_user.undelivered_orders
     @orders_view.display_orders(orders)
   end
@@ -30,14 +30,14 @@ class OrdersController
     # Ask VIEW to display the orders
     @orders_view.display_orders(orders)
     # Ask VIEW for the id
-    order_id = @orders_view.ask_for("number of the order").to_i
+    order_index = @orders_view.ask_for("number of the order").to_i - 1
     # Ask REPO to mark the given id as delivered
-    @order_repository.mark_as_delivered(order_id)
+    @order_repository.mark_as_delivered(orders[order_index].id)
   end
 
-  def undelivered_orders
+  def list_undelivered_orders
     # Ask ORDERS REPO for undelivered
-    orders = @order_repository.undelivered
+    orders = @order_repository.undelivered_orders
     # Ask ORDERS view TO DISPLAY THEM
     @orders_view.display_orders(orders)
   end
@@ -60,20 +60,20 @@ class OrdersController
     # Ask MEALS VIEW to display the meals
     @meals_view.display_meals(meals)
     # Ask VIEW for an id of the chosen meal
-    meal_id = @meals_view.ask_for("meal number").to_i
-    # Ask MEALS REPO for the meal with the given id
-    @meal_repository.find(meal_id)
+    meal_index = @meals_view.ask_for("meal number").to_i - 1
+    # Take meal with the given index
+    meals[meal_index]
   end
 
   def select_delivery_guy
     # Ask employeeS REPO for the employees
-    employees = @employee_repository.delivery_guys
+    employees = @employee_repository.all_delivery_guys
     # Ask employeeS VIEW to display the employees
     @employees_view.display_employees(employees)
     # Ask VIEW for an id of the chosen employee
-    employee_id = @employees_view.ask_for("delivery guy number").to_i
-    # Ask employeeS REPO for the employee with the given id
-    @employee_repository.find(employee_id)
+    employee_index = @employees_view.ask_for("delivery guy number").to_i - 1
+    # Take employee with the given index
+    employees[employee_index]
   end
 
   def select_customer
@@ -82,8 +82,8 @@ class OrdersController
     # Ask customerS VIEW to display the customers
     @customers_view.display_customers(customers)
     # Ask VIEW for an id of the chosen customer
-    customer_id = @customers_view.ask_for("customer number").to_i
-    # Ask customerS REPO for the customer with the given id
-    @customer_repository.find(customer_id)
+    customer_index = @customers_view.ask_for("customer number").to_i - 1
+    # Take customer with the given index
+    customers[customer_index]
   end
 end

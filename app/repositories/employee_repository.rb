@@ -1,40 +1,33 @@
 require "csv"
 
+require_relative "base_repository"
 require_relative "../models/employee"
 
-class EmployeeRepository
-  def initialize(csv_path)
-    @csv_path = csv_path
-    @employees = []
-    load_csv if File.exist?(csv_path)
-  end
+class EmployeeRepository < BaseRepository
+  undef add
 
-  def all
-    @employees
-  end
-
-  def delivery_guys
-    @employees.select { |employee| employee.delivery_guy? }
+  def all_delivery_guys
+    @elements.select { |employee| employee.delivery_guy? }
   end
 
   def find(id)
-    @employees.find { |employee| employee.id == id }
+    @elements.find { |employee| employee.id == id }
   end
 
   def find_by_username(username)
-    @employees.find { |employee| employee.username == username }
+    @elements.find { |employee| employee.username == username }
   end
 
   private
 
   def next_id
-    @employees.empty? ? 1 : @employees.last.id + 1
+    @elements.empty? ? 1 : @elements.last.id + 1
   end
 
   def update_csv
     CSV.open(@csv_path, "wb") do |csv|
       csv << %w[id username password role]
-      @employees.each do |employee|
+      @elements.each do |employee|
         csv << [employee.id, employee.username, employee.password, employee.role]
       end
     end
@@ -44,7 +37,7 @@ class EmployeeRepository
     csv_options = { headers: :first_row, header_converters: :symbol }
     CSV.foreach(@csv_path, csv_options) do |row|
       row[:id] = row[:id].to_i
-      @employees << Employee.new(row)
+      @elements << Employee.new(row)
     end
   end
 end

@@ -6,12 +6,12 @@ class OrdersView
   end
 
   def display_orders(orders)
-    orders.each do |order|
-      puts "Order ##{order.id}"
-      puts "Customer:     #{order.customer.name}"
-      puts "Delivery Guy: #{order.employee.username}"
-      puts "Meal:         #{order.meal.name}"
-      puts "-------"
+    orders.each_with_index do |order, index|
+      puts "Order ##{index + 1}\n
+        Customer:     #{order.customer.name}
+        Delivery Guy: #{order.employee.username}
+        Meal:         #{order.meal.name}
+      -------"
     end
   end
 end

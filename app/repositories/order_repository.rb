@@ -27,7 +27,7 @@ class OrderRepository
     @orders.find { |order| order.id == id }
   end
 
-  def undelivered
+  def undelivered_orders
     @orders.reject { |order| order.delivered? }
   end
 
