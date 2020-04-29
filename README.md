@@ -4,7 +4,7 @@
 - [x] As a manager, I can add a new customer
 - [x] As a manager, I can list all the customers
 ---
-- [ ] As a manager, I can add a new order
-- [ ] As a manager, I can list all undelivered orders
-- [ ] As a delivery guy, I can mark my orders as delivered
-- [ ] As a delivery guy, I can list all my undelivered orders
+- [x] As a manager, I can add a new order
+- [x] As a manager, I can list all undelivered orders
+- [x] As a delivery guy, I can mark my orders as delivered
+- [x] As a delivery guy, I can list all my undelivered orders

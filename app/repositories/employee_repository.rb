@@ -13,6 +13,10 @@ class EmployeeRepository
     @employees
   end
 
+  def delivery_guys
+    @employees.select { |employee| employee.delivery_guy? }
+  end
+
   def find(id)
     @employees.find { |employee| employee.id == id }
   end

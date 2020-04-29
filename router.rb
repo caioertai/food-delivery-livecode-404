@@ -1,7 +1,8 @@
 class Router
-  def initialize(meals_controller, customers_controller, sessions_controller)
+  def initialize(meals_controller, customers_controller, orders_controller, sessions_controller)
     @meals_controller = meals_controller
     @customers_controller = customers_controller
+    @orders_controller = orders_controller
     @sessions_controller = sessions_controller
     @current_user = nil
     @running = true
@@ -36,6 +37,8 @@ class Router
     puts "2. List Meals"
     puts "3. Add Customer"
     puts "4. List Customers"
+    puts "5. Create an order"
+    puts "6. List undelivered orders"
   end
 
   def display_common_menu
@@ -49,6 +52,8 @@ class Router
     when 2 then @meals_controller.list
     when 3 then @customers_controller.add
     when 4 then @customers_controller.list
+    when 5 then @orders_controller.add
+    when 6 then @orders_controller.undelivered_orders
     when 9 then @current_user = nil
     when 0 then @running = false
     end
@@ -56,8 +61,8 @@ class Router
 
   def dispatch_dg(action)
     case action
-    when 1 then puts "TODO!"
-    when 2 then puts "TODO!"
+    when 1 then @orders_controller.mark_as_delivered(@current_user)
+    when 2 then @orders_controller.undelivered_orders_for(@current_user)
     when 9 then @current_user = nil
     when 0 then @running = false
     end
